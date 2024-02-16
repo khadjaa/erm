@@ -4,9 +4,9 @@ using erm.Services;
 
 public class RiskService : IRiskService
 {
-    IMemoryRepository<Risk> _repository;
+    ISQLRepository<Risk> _repository;
 
-    public RiskService(IMemoryRepository<Risk> repository)
+    public RiskService(ISQLRepository<Risk> repository)
     {
         _repository = repository;
     }
@@ -35,24 +35,27 @@ public class RiskService : IRiskService
     public string Update(Guid id, Risk item)
     {
         var _item = _repository.GetById(id);
-        if (_item is null)
+        if (_item is not null)
         {
-            return "Item not found";
+            _item.Name = item.Name;
+            _item.Description = item.Description;
+            _item.Impact = item.Impact;
+            _item.Probability = item.Probability;
+
+            var result = _repository.Update(_item);
+            if (result)
+                return "Item updated";
         }
 
-        _repository.Update(_item);
-        return "Item updated";
+        return "Item not updated";
     }
 
     public string Delete(Guid id)
     {
-        var _item = _repository.GetById(id);
-        if (_item is null)
-        {
+        var result = _repository.Delete(id);
+        if (result)
+            return "Item deleted";
+        else
             return "Item not found";
-        }
-
-        _repository.Delete(id);
-        return "Item deleted";
     }
 }
