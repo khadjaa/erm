@@ -1,8 +1,8 @@
 namespace erm.Repositories;
 
-public interface IMemoryRepository<T> where T : BaseEntity
+public interface ISQLRepository<T> where T : BaseEntity
 {
-    IEnumerable<T> GetAll();
+    IQueryable<T> GetAll();
     T GetById(Guid id);
     bool Create(T item);
     bool Update(T item);
