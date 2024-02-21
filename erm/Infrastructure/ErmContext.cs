@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 public class ErmDbContext : DbContext
 {
     public ErmDbContext(DbContextOptions options) : base(options)
-    {}
+    {
+        // this.Database.EnsureCreated();
+    }
 
     // Добавьте DbSet для ваших сущностей здесь
-    public DbSet<Risk> Risks { get; set; }
+    public DbSet<Risk> Risk { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
