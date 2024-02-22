@@ -29,6 +29,7 @@ public class ErmDbContext : DbContext
         // используйте метод HasData:
 
         modelBuilder.Entity<Risk>().HasData(
+            risk,
             new Risk { Name = "First Risk", Description = "Description of first risk", Probability = Probability.High, Impact = Impact.High },
             new Risk { Name = "Second Risk", Description = "Description of second risk", Probability = Probability.Medium, Impact = Impact.Medium }
         );
