@@ -8,7 +8,6 @@ public class ErmDbContext : DbContext
         // this.Database.EnsureCreated();
     }
 
-    // Добавьте DbSet для ваших сущностей здесь
     public DbSet<Risk> Risk { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
