@@ -7,18 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 public class RiskController : ControllerBase
 {
     readonly IRiskService _service;
-    private readonly ErmDbContext _context;
-    public RiskController(IRiskService service, ErmDbContext context)
+    public RiskController(IRiskService service)
     {
         _service = service;
-        _context = context;
     }
 
     [HttpGet("AllItems")]
     public IEnumerable<Risk> Get()
     {
-        // return _service.GetAll();
-        return _context.Risk;
+        return _service.GetAll();
     }
 
     [HttpGet("GetItemById")]
@@ -30,10 +27,7 @@ public class RiskController : ControllerBase
     [HttpPost("Create")]
     public string Post([FromBody] Risk item)
     {
-        _service.Create(item);
-        _context.Add(item);
-        _context.SaveChanges();
-        return "created";
+        return _service.Create(item);
     }
 
     [HttpPut("Update")]
