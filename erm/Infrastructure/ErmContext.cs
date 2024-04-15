@@ -17,8 +17,8 @@ public class ErmDbContext : DbContext
         var risk = new Risk();
         risk.Name = "firstRiskInContext";
         risk.Description = "descriptionInContext";
-        risk.Impact = Impact.High;
-        risk.Probability = Probability.Low;
+        risk.Impact = 1;
+        risk.Probability = 2;
         
         modelBuilder.Entity<Risk>(entity =>
         {
@@ -30,8 +30,8 @@ public class ErmDbContext : DbContext
 
         modelBuilder.Entity<Risk>().HasData(
             risk,
-            new Risk { Name = "First Risk", Description = "Description of first risk", Probability = Probability.High, Impact = Impact.High },
-            new Risk { Name = "Second Risk", Description = "Description of second risk", Probability = Probability.Medium, Impact = Impact.Medium }
+            new Risk { Name = "First Risk", Description = "Description of first risk", Probability = 2, Impact = 3 },
+            new Risk { Name = "Second Risk", Description = "Description of second risk", Probability = 1, Impact = 2 }
         );
 
         base.OnModelCreating(modelBuilder);
