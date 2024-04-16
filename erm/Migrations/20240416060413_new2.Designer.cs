@@ -4,6 +4,7 @@ using Erm.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace erm.Migrations
 {
     [DbContext(typeof(ErmDbContext))]
-    partial class ErmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240416060413_new2")]
+    partial class new2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,7 +105,7 @@ namespace erm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e26f2b0f-bfc7-4949-a397-9a7b370cbd75"),
+                            Id = new Guid("700a63b9-1c09-484f-877e-70d1d24b3c04"),
                             Description = "descriptionInContext",
                             Impact = 1,
                             Name = "firstRiskInContext",
@@ -110,7 +113,7 @@ namespace erm.Migrations
                         },
                         new
                         {
-                            Id = new Guid("07f00b46-d328-4ecc-bc36-97337c7ce87d"),
+                            Id = new Guid("c720c286-a5f3-4779-8eaf-89dbd96f48f0"),
                             Description = "Description of first risk",
                             Impact = 3,
                             Name = "First Risk",
@@ -118,7 +121,7 @@ namespace erm.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6cab41f4-1833-4936-86ef-1da7a4f3af53"),
+                            Id = new Guid("5bafc0ed-6eaa-4ef5-a01a-ad94db4b6395"),
                             Description = "Description of second risk",
                             Impact = 2,
                             Name = "Second Risk",
@@ -139,7 +142,7 @@ namespace erm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("011bc8c2-bce6-4c81-96ec-8e101a52aada"),
+                            Id = new Guid("943c19a3-dbf5-4e2d-9738-29aabc7b79e7"),
                             FirstName = "first",
                             LastName = "last",
                             Password = "123",
@@ -150,7 +153,7 @@ namespace erm.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7cf44a7-12e6-4de6-beb7-83fd95a42211"),
+                            Id = new Guid("8f58b886-dcef-46e6-b1e8-4e7d85b04d1a"),
                             FirstName = "second",
                             LastName = "last1",
                             Password = "222",
