@@ -1,6 +1,6 @@
-using erm.Models;
-using erm.Repositories;
-using erm.Services;
+using Erm.Models;
+using Erm.Repositories;
+using Erm.Services;
 
 public class RiskService : IRiskService
 {

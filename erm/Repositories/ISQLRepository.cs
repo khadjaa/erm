@@ -1,4 +1,4 @@
-namespace erm.Repositories;
+namespace Erm.Repositories;
 
 public interface ISQLRepository<T> where T : BaseEntity
 {

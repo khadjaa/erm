@@ -1,4 +1,4 @@
-namespace erm.Models;
+namespace Erm.Models;
 
 public class Risk : BaseEntity
 {

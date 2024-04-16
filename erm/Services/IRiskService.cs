@@ -1,6 +1,6 @@
-using erm.Models;
+using Erm.Models;
 
-namespace erm.Services;
+namespace Erm.Services;
 
 public interface IRiskService
 {

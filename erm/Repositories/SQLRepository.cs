@@ -1,4 +1,5 @@
-using erm.Repositories;
+using Erm.Infrastructure;
+using Erm.Repositories;
 
 public class SQLRepository<T> : ISQLRepository<T> where T : BaseEntity
 {

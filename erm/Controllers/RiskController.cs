@@ -1,9 +1,11 @@
-using erm.Models;
-using erm.Services;
+using Erm.Models;
+using Erm.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class RiskController : ControllerBase
 {
     readonly IRiskService _service;
@@ -12,6 +14,7 @@ public class RiskController : ControllerBase
         _service = service;
     }
 
+    [AllowAnonymous]
     [HttpGet("AllItems")]
     public IEnumerable<Risk> Get()
     {
@@ -19,6 +22,7 @@ public class RiskController : ControllerBase
     }
 
     [HttpGet("GetItemById")]
+    [Authorize(Roles = "admin")]
     public Risk Get(Guid id)
     {
         return _service.GetById(id);
@@ -40,5 +44,11 @@ public class RiskController : ControllerBase
     public string Delete([FromQuery] Guid id)
     {
         return _service.Delete(id);
+    }
+
+    [HttpGet("Exception")]
+    public IEnumerable<Risk> Get(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }
