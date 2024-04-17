@@ -17,6 +17,7 @@ namespace Erm.Infrastructure
         public DbSet<MyTask> MyTasks { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
+        public DbSet<Issue> Issues { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
@@ -116,6 +117,20 @@ namespace Erm.Infrastructure
                     StartDate = new DateTime(2023, 12, 12),
                     EndDate = new DateTime(2024, 12, 15),
                     Tasks = "tasks for sprint"
+                });
+            });
+            
+            modelBuilder.Entity<Issue>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+                entity.Property(p => p.Name).IsRequired().HasMaxLength(20).HasDefaultValue("first Issue");
+
+                entity.HasData(new Issue()
+                {
+                    Name = "first Issue",
+                    StartDate = new DateTime(2024, 01, 01),
+                    EndDate = new DateTime(2024, 11, 15),
+                    FindByWorker = "Find By Worker"
                 });
             });
             

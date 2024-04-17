@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         service.AddScoped<IMyTaskService, MyTaskService>();
         service.AddScoped<IProjectService, ProjectService>();
         service.AddScoped<ISprintService, SprintService>();
+        service.AddScoped<IIssueService, IssueService>();
         service.AddScoped(typeof(ISQLRepository<>), typeof(SQLRepository<>));
     }
 }
