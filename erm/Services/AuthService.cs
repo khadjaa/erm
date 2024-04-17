@@ -12,6 +12,7 @@ namespace Erm.Services
     public class AuthService
     {
         private readonly ErmDbContext _context;
+
         public AuthService(ErmDbContext context)
         {
             _context = context;
@@ -19,7 +20,8 @@ namespace Erm.Services
 
         public async Task<TokenInfo> Login(string username, string password)
         {
-            var user = await _context.Persons.SingleOrDefaultAsync(x => x.Username == username && x.Password == password);
+            var user = await _context.Persons.SingleOrDefaultAsync(
+                x => x.Username == username && x.Password == password);
 
             return await GeneratedJWT(user);
         }
@@ -39,19 +41,25 @@ namespace Erm.Services
             if (user.IsBlocked)
                 throw new ArgumentException("User does not have access to login.");
 
-            var claims = new List<Claim> {
+            var userRoles = new string[] { user.Role };
+
+            var claims = new List<Claim>
+            {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.FullName),
-                new Claim(ClaimTypes.Role, user.Role)
             };
+
+            foreach (var userRole in userRoles)
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
 
             // создаем JWT-токен
             var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    claims: claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+                issuer: AuthOptions.ISSUER,
+                audience: AuthOptions.AUDIENCE,
+                claims: claims,
+                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(),
+                    SecurityAlgorithms.HmacSha256));
 
             var accessToken = new JwtSecurityTokenHandler().WriteToken(jwt);
             var refreshToken = Guid.NewGuid().ToString();

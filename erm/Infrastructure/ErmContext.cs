@@ -14,6 +14,7 @@ namespace Erm.Infrastructure
         public DbSet<Risk> Risk { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Worker> Workers { get; set; }
+        public DbSet<MyTask> MyTasks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
@@ -71,6 +72,20 @@ namespace Erm.Infrastructure
                 });
             });
 
+            modelBuilder.Entity<MyTask>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+                entity.Property(p => p.Name).IsRequired().HasMaxLength(20).HasDefaultValue("first");
+
+                entity.HasData(new MyTask()
+                {
+                    Name = "first task",
+                    StartDate = new DateTime(2012, 12, 12),
+                    EndDate = new DateTime(2015, 12, 15),
+                    AssignedTo = "John Doe"
+                });
+            });
+            
             base.OnModelCreating(modelBuilder);
         }
     }

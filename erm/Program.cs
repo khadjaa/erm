@@ -21,10 +21,8 @@ builder.Services.AddDbContext<ErmDbContext>(con =>
 builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
-
 // Adding custom services
- builder.Services.AddMyServices();
-
+builder.Services.AddMyServices();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(GlobalExceptionFilter)));
 
 builder.Services.AddSwaggerGen(c =>

@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
     {
         service.AddScoped<AuthService>();
         service.AddScoped<IRiskService, RiskService>();
+        service.AddScoped<IMyTaskService, MyTaskService>();
         service.AddScoped(typeof(ISQLRepository<>), typeof(SQLRepository<>));
     }
 }

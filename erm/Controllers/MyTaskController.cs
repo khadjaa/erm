@@ -6,35 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("[controller]")]
 [Authorize(policy: "AdminOnly")]
-public class RiskController : ControllerBase
+public class MyTaskController : ControllerBase
 {
-    readonly IRiskService _service;
-    public RiskController(IRiskService service)
+    readonly IMyTaskService _service;
+    public MyTaskController(IMyTaskService service)
     {
         _service = service;
     }
 
     [AllowAnonymous]
     [HttpGet("AllItems")]
-    public IEnumerable<Risk> Get()
+    public IEnumerable<MyTask> Get()
     {
         return _service.GetAll();
     }
 
     [HttpGet("GetItemById")]
-    public Risk Get(Guid id)
+    public MyTask Get(Guid id)
     {
         return _service.GetById(id);
     }
 
     [HttpPost("Create")]
-    public string Post([FromBody] Risk item)
+    public string Post([FromBody] MyTask item)
     {
         return _service.Create(item);
     }
 
     [HttpPut("Update")]
-    public string Put([FromQuery] Guid id, [FromBody] Risk item)
+    public string Put([FromQuery] Guid id, [FromBody] MyTask item)
     {
         return _service.Update(id, item);
     }
@@ -43,11 +43,5 @@ public class RiskController : ControllerBase
     public string Delete([FromQuery] Guid id)
     {
         return _service.Delete(id);
-    }
-
-    [HttpGet("Exception")]
-    public IEnumerable<Risk> Get(CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
     }
 }

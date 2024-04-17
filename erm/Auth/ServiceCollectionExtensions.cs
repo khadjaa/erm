@@ -11,6 +11,16 @@ public static class ServiceCollectionExtensions
 {
     public static void AddMyAuth(this IServiceCollection service)
     {
+        service.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminOnly", 
+                policy =>
+                {
+                    policy.RequireRole("admin", "editor");
+                    // policy.RequireRole("editor");
+                });
+            options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
+        });
         service.AddAuthorization();
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
