@@ -16,6 +16,7 @@ namespace Erm.Infrastructure
         public DbSet<Worker> Workers { get; set; }
         public DbSet<MyTask> MyTasks { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Sprint> Sprints { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
@@ -101,6 +102,20 @@ namespace Erm.Infrastructure
                     Sprints = "3",
                     Risks = "risks",
                     AssignedTo = "Scrum"
+                });
+            });
+
+            modelBuilder.Entity<Sprint>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+                entity.Property(p => p.Name).IsRequired().HasMaxLength(20).HasDefaultValue("first sprint");
+
+                entity.HasData(new Sprint()
+                {
+                    Name = "first Sprint",
+                    StartDate = new DateTime(2023, 12, 12),
+                    EndDate = new DateTime(2024, 12, 15),
+                    Tasks = "tasks for sprint"
                 });
             });
             
