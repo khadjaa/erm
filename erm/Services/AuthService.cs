@@ -20,7 +20,7 @@ namespace Erm.Services
 
         public async Task<TokenInfo> Login(string username, string password)
         {
-            var user = await _context.Persons.SingleOrDefaultAsync(
+            var user = await _context.Workers.SingleOrDefaultAsync(
                 x => x.Username == username && x.Password == password);
 
             return await GeneratedJWT(user);
@@ -28,7 +28,7 @@ namespace Erm.Services
 
         public async Task<TokenInfo> RefreshToken(string refreshToken)
         {
-            var user = await _context.Persons.SingleOrDefaultAsync(x => x.RefreshToken == refreshToken);
+            var user = await _context.Workers.SingleOrDefaultAsync(x => x.RefreshToken == refreshToken);
 
             return await GeneratedJWT(user);
         }

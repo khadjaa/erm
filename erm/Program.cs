@@ -1,22 +1,19 @@
-using System.Text.Json.Serialization;
 using Erm.Filters;
 using Erm.Infrastructure;
 using Erm.Middlewares;
-using Erm.Repositories;
 using Erm.Services;
-using Erm.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using MyUser.Models.Helpers;
 using Microsoft.OpenApi.Models;
+using MyUser.Models.Helpers;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMyAuth();
 builder.Services.AddDbContext<ErmDbContext>(con =>
     con.UseSqlServer("server=localhost;integrated security=True; database=ErmDB;TrustServerCertificate=true;"));
-        // .LogTo(Console.Write, LogLevel.Information)
-        // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+// .LogTo(Console.Write, LogLevel.Information)
+// .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
 builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
