@@ -1,3 +1,5 @@
+using erm.Models;
+
 namespace Erm.Models;
 
 public class MyTask : BaseEntity
@@ -6,7 +8,6 @@ public class MyTask : BaseEntity
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public string AssignedTo { get; set; } = string.Empty;
-
-    public ICollection<Worker> Workers { get; set; }
+    public ICollection<WorkerMyTask> WorkerTasks { get; set; } = new List<WorkerMyTask>();
 
 }
